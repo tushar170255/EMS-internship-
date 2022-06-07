@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddEmployeeResponse {
     private String message;
-    private Long empId;
+    private int empId;
 }

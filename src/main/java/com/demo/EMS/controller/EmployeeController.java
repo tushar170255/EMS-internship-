@@ -27,10 +27,10 @@ public class EmployeeController {
     //display employee by id
     @GetMapping("/employee/{id}")
     public ResponseEntity<GetEmployeeByIdResponse> getEmployee(@PathVariable int id){
-        Emp employee=employeeService.getEmployee(id);
+        Emp employee = employeeService.getEmployee(id);
         if(employee==null)
         {
-            GetEmployeeByIdResponse getEmployeeByIdResponse=new GetEmployeeByIdResponse(employee,"No employee found for this Id");
+            GetEmployeeByIdResponse getEmployeeByIdResponse=new GetEmployeeByIdResponse(null,"No employee found for this Id");
             return ResponseEntity.ok(getEmployeeByIdResponse);
         }
         else{
@@ -74,7 +74,7 @@ public class EmployeeController {
     @DeleteMapping("/employees")
     public ResponseEntity<DeleteAllEmployeeResponse> deleteAllEmployees(){
 
-        Long count=employeeService.deleteAllEmployees();
+        int count=employeeService.deleteAllEmployees();
         DeleteAllEmployeeResponse deleteAllEmployeeResponse;
         if(count==0)
         {
@@ -89,7 +89,7 @@ public class EmployeeController {
 
     //delete by employee id
     @DeleteMapping("/employees/{id}")
-    public ResponseEntity<DeleteEmployeeByIdResponse> deleteEmployeeByID(@PathVariable Long id){
+    public ResponseEntity<DeleteEmployeeByIdResponse> deleteEmployeeByID(@PathVariable int id){
        DeleteEmployeeByIdResponse deleteEmployeeByIdResponse;
       if( employeeService.deleteEmployeeByID(id) )
       {
@@ -100,4 +100,25 @@ public class EmployeeController {
       }
       return ResponseEntity.ok(deleteEmployeeByIdResponse);
     }
+
+    @GetMapping("/getallemployeesbyname/{name}")
+    public ResponseEntity<GetAllEmployeeByNameResponse> getAllEmployeeByName( @PathVariable String name)
+    {
+        List<Emp> e= employeeService.getAllEmployeeByName(name);
+        GetAllEmployeeByNameResponse getAllEmployeeByName ;
+        if(e==null)
+        {
+            getAllEmployeeByName= new GetAllEmployeeByNameResponse(e,"No employee found by given Name");
+
+
+        }
+        else{
+            getAllEmployeeByName =new GetAllEmployeeByNameResponse(e, "These are all the employee with given name");
+
+        }
+        return ResponseEntity.ok(getAllEmployeeByName);
+    }
+
+
+
 }

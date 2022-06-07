@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeleteAllEmployeeResponse {
-    private Long count;
+    private int  count;
     private String message;
 }

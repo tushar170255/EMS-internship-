@@ -18,12 +18,14 @@ public interface EmployeeService {
     Emp addEmployee(AddEmployeeRequest e) ;
 
     // updating employee by id
-    Emp updateEmployee(UpdateEmployeeRequest emp, int id);
+    Emp updateEmployee(UpdateEmployeeRequest emp, int  id);
 
     // deleting all employees
-     Long deleteAllEmployees();
+     int  deleteAllEmployees();
 
     // deleting employee by id
-    Boolean deleteEmployeeByID(Long  id);
+    Boolean deleteEmployeeByID(int   id);
+    List<Emp> getAllEmployeeByName( String name);
+
 
 }

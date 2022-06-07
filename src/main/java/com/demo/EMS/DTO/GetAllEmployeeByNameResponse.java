@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Optional;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEmployeeByIdResponse {
-    private Emp employee;
+public class GetAllEmployeeByNameResponse {
+    private List<Emp> employees;
     private String message;
+
 }

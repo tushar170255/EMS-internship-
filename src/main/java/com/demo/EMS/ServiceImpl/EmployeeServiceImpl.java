@@ -24,6 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Emp getEmployee(int id){
 
         return employeeRepo.findById(id).orElse(null) ;
+//       System.out.println(e.getFirstName());
+//        return e;
     }
 
     public Emp addEmployee(AddEmployeeRequest e){
@@ -33,47 +35,56 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
-    public Emp updateEmployee(UpdateEmployeeRequest emp , int id ) {
+    public Emp updateEmployee(UpdateEmployeeRequest emp , int  id ) {
 
-        employeeRepo.findById(id).ifPresent(user -> user.setFirstName(emp.getFirstName()));
-        employeeRepo.findById(id).ifPresent(user -> user.setLastName(emp.getLastName()));
-        employeeRepo.findById(id).ifPresent(user -> user.setEmail(emp.getEmail()));
-        return employeeRepo.findById(id).orElse(null);
-
-
+//        employeeRepo.findById(id).ifPresent(user -> user.setFirstName(emp.getFirstName()));
+//        employeeRepo.findById(id).ifPresent(user -> user.setLastName(emp.getLastName()));
+//        employeeRepo.findById(id).ifPresent(user -> user.setEmail(emp.getEmail()));
+//        return employeeRepo.findById(id).orElse(null);
 
 
 
-//      Optional<Emp> employee= employeeRepo.findById(id);
-//    if(employee==null){
-//        return  employee;
-//    }
-//    else{
-//
-//
-//        employee.setFirstName()
-//
-//    }
+
+
+      Emp employee= employeeRepo.findById(id).orElse(null);
+    if(employee==null){
+        return  employee;
+    }
+    else{
+
+
+        employee.setFirstName(emp.getFirstName());
+        employee.setEmail(emp.getEmail());
+        employee.setLastName(emp.getLastName());
+        employeeRepo.save(employee);
+        return employee;
+    }
 
     }
 
-    public Long deleteAllEmployees(){
-        Long count=employeeRepo.count();
+    public int  deleteAllEmployees(){
+        int  count= (int) employeeRepo.count();
         employeeRepo.deleteAll();
         return count;
     }
 
-    public Boolean deleteEmployeeByID(Long id){
-        Optional<Emp> e=employeeRepo.findById(Math.toIntExact(id));
+    public Boolean deleteEmployeeByID(int  id){
+        Emp e=employeeRepo.findById(id).orElse(null);
         if(e==null)
         {
 
             return false;
         }
         else{
-            employeeRepo.deleteById(Math.toIntExact(id));
+            employeeRepo.deleteById(id);
             return true;
         }
 
+    }
+    @Override
+    public List<Emp> getAllEmployeeByName( String name)
+    {
+        List<Emp> e= employeeRepo.findAllByFirstName(name);
+        return e;
     }
 }

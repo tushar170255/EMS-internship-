@@ -20,7 +20,7 @@ public class Emp {
     @Id
     @Column(name = "employee_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
    @NotNull
     private String firstName;
    @NotNull
