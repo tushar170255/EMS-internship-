@@ -9,7 +9,7 @@ public interface EmployeeRepo extends JpaRepository<Emp,Integer> {
 
     List<Emp> findAllByFirstName(String name);
 
-     Emp findById(int id) ;
+
 
 
 
